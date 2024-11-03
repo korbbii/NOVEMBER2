@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <%- include('partials/sidebar') %>
+    <!-- MAIN -->
+    <main>
+      <h1 class="title">Dashboard</h1>
+      <div class="info-data">
+        <div class="card" onclick="location.href='/instructors'" style="cursor: pointer;">
+          <div class="head">
+            <div>
+              <h2>Instructors</h2>
+            </div>
+          </div>
+          <span class="count" id="instructors-count">0</span>
+        </div>
+        <div class="card" onclick="location.href='/students'" style="cursor: pointer;">
+          <div class="head">
+            <div>
+              <h2>Students</h2>
+            </div>
+          </div>
+          <span class="count" id="students-count">0</span>
+        </div>
+        <div class="card" onclick="location.href='/section'" style="cursor: pointer;">
+          <div class="head">
+            <div>
+              <h2>Section</h2>
+            </div>
+          </div>
+          <span class="count" id="section-count">0</span>
+        </div>
+        <div class="card">
+          <div class="head">
+            <div>
+              <h2>Subjects</h2>
+            </div>
+          </div>
+          <span class="count" id="subjects-count">0</span>
+        </div>
+      </div>
+    </main>
+    <!-- MAIN -->
+    </section>
+    <!-- NAVBAR -->
+
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>

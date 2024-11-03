@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/2section.css" />
+    <title>Section 2nd Year</title>
+  </head>
+  <body>
+    <%- include('partials/sidebar') %>
+    
+    <main>
+      <div class="table-container">
+        <div class="header">
+          <h2>Section</h2>
+          <button class="add-bundle-btn">
+            <i class='bx bx-plus'></i> Add Section
+          </button>
+        </div>
+
+        <div class="table-controls">
+          <label for="show-entries">Show
+            <select id="show-entries">
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+            </select>
+            entries
+          </label>
+
+          <div class="search-box">
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
+
+        <table id="section-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Students</th>
+              <th>Block</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Sample 1</td>
+              <td>Sample 1</td>
+              <td>
+                <i class='bx bx-show'></i>
+                <i class='bx bx-edit'></i>
+                <i class='bx bx-trash'></i>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sample 2</td>
+              <td>Sample 2</td>
+              <td>
+                <i class='bx bx-show'></i>
+                <i class='bx bx-edit'></i>
+                <i class='bx bx-trash'></i>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Sample 3</td>
+              <td>Sample 3</td>
+              <td>
+                <i class='bx bx-show'></i>
+                <i class='bx bx-edit'></i>
+                <i class='bx bx-trash'></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="table-info">
+          <span>Showing 1 to 3 of 3 Entities</span>
+          <div class="pagination-controls">
+            <button class="pagination-btn">Previous</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">Next</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add Bundle Modal -->
+<div id="add-bundle-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3>Add Section</h3>
+    <form id="add-bundle-form">
+      <label for="subject-id">Section ID</label>
+      <input type="text" id="Subject-id" placeholder="Subject id" required />
+
+      <label for="select-product">Select SY</label>
+<div id="select-product" class="multi-select">
+  <div class="select-box" id="select-box">
+    <span>Select SY</span>
+    <i class='bx bx-chevron-down'></i>
+  </div>
+  <div class="checkbox-dropdown hidden">
+    <label>
+      <input type="checkbox" value="Product 1" /> Instructor
+    </label>
+    <label>
+      <input type="checkbox" value="K" /> K
+    </label>
+    <label>
+      <input type="checkbox" value="T" /> T
+    </label>
+  </div>
+</div>
+
+      <label for="subject-name">Block</label>
+      <input type="text" id="subject-name" placeholder="Name" required />
+
+      <label for="subject-description">Section Description</label>
+      <textarea id="subject-description" placeholder="Suject Description"></textarea>
+
+      <div class="form-actions">
+        <button type="submit" class="add-btn">Add</button>
+        <button type="button" class="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/bundlepopup.js"></script>
+  </body>
+</html>

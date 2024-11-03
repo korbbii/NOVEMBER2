@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/user.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <%- include('partials/sidebar') %>
+
+      <!-- MAIN -->
+      <main>
+        <div class="container">
+          <div class="header">
+            <h2>User List</h2>
+            <button class="new-user-btn">+ New User</button>
+          </div>
+          
+          <div class="table-controls">
+            <div class="show-entries">
+              <label for="entries">Show</label>
+              <select id="entries" class="entries-select">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span>entries</span>
+            </div>
+            
+            <div class="search-box">
+              <label for="search">Search:</label>
+              <input type="text" id="search" class="search-input" placeholder="Search users...">
+            </div>
+          </div>
+          
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>USER ID</th>
+                <th>Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic rows will be appended here by AJAX -->
+            </tbody>
+          </table>
+          
+          
+          <div class="pagination">
+            <button class="pagination-btn">Previews</button>
+            <input type="text" class="page-number" value="1">
+            <button class="pagination-btn">Next</button>
+          </div>
+        </div>
+      </main>      
+      <!-- MAIN -->
+       <!-- New User Popup -->
+<div id="newUserModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>New User</h3>
+    <form id="newUserForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+
+      <label for="userType">User Type</label>
+      <select id="userType" name="userType">
+        <option value="Student">Student</option>
+        <option value="Instructor">Instructor</option>
+        <option value="Admin">Admin</option>
+      </select>
+
+      <div class="button-group">
+        <button type="submit" class="save-btn">Save</button>
+        <button type="button" class="cancel-btn">Cancel</button>
+    </div>
+    
+    </form>
+  </div>
+</div>
+
+  <!-- Edit User Popup -->
+  <div id="editUserModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Edit User</h3>
+      <form id="editUserForm">
+        <input type="hidden" id="editUserId" name="id" />
+
+        <label for="editName">Name</label>
+        <input type="text" id="editName" name="name" required />
+
+        <label for="editUsername">Username</label>
+        <input type="text" id="editUsername" name="username" required />
+
+        <label for="editPassword">Password</label>
+        <input type="password" id="editPassword" name="password" />
+
+        <label for="editUserType">User Type</label>
+        <select id="editUserType" name="userType">
+          <option value="Student">Student</option>
+          <option value="Instructor">Instructor</option>
+          <option value="Admin">Admin</option>
+        </select>
+
+        <div class="button-group">
+          <button type="submit" class="save-btn">Update</button>
+          <button type="button" class="cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+<script>
+  
+$(document).ready(function() {
+  // Function to load users (students) from the server
+  async function loadUsers() {
+    try {
+      const response = await fetch('/api/students'); // Fetching students
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const students = await response.json(); // Parse the JSON response
+
+      const tableBody = $('.user-table tbody');
+      tableBody.empty(); // Clear existing rows
+
+      // Append new rows based on students data
+      students.forEach((student, index) => {
+        const row = `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${student.fname}</td>
+            <td>${student.studentId}</td>
+            <td>Student</td> 
+            <td>
+              <button class="edit-btn" data-id="${student.id}">Edit</button>
+              <button class="delete-btn" data-id="${student.id}">Delete</button>
+            </td>
+          </tr>
+        `;
+        tableBody.append(row);
+      });
+    } catch (error) {
+      console.error('Error loading users:', error);
+    }
+  }
+
+  // Call loadUsers on page load
+  loadUsers();
+});
+
+</script>
+
+
+    </section>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/user.js"></script>
+    <script src="/js/userpopup.js"></script>
+  </body>
+</html>
